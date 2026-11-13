@@ -1,0 +1,16 @@
+{
+  "name": "studioxid",
+  "owner": {
+    "name": "Studio XID, Inc."
+  },
+  "plugins": [
+    {
+      "name": "omni-adapter",
+      "source": "./",
+      "description": "Writing and debugging code that joins a Connect Omni stage through the adapter (six languages)."
+    }
+  ],
+  "metadata": {
+    "description": "Omni Adapter — Claude Code skill for consumers of the adapter library."
+  }
+}

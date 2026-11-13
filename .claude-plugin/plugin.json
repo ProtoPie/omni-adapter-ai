@@ -1,0 +1,13 @@
+{
+  "name": "omni-adapter",
+  "description": "Skill and full usage guide (llms.txt) for writing code that joins a Connect Omni stage with the official adapter — TypeScript, Python, C#, Kotlin, Swift, Dart.",
+  "author": {
+    "name": "Studio XID, Inc."
+  },
+  "repository": "https://github.com/ProtoPie/omni-adapter-ai",
+  "skills": [
+    "./skills/"
+  ],
+  "license": "Apache-2.0",
+  "homepage": "https://github.com/ProtoPie/omni-adapter-ai"
+}
