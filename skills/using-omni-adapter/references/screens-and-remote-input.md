@@ -45,7 +45,7 @@ Stream**, then type that name.
 
 `await client.ensureStreamLayer()` (Python `ensure_stream_layer()`, C#
 `EnsureStreamLayerAsync()`) is optional — an idempotent call that returns the layer. Read
-`renamed` on the result: `true` — the server gave this adapter another name than it asked for (`name (2)`): another program on a different key uses this name, or you rotated keys without revoking the old one (the layer stays bound to the old key) — rename one, or revoke the old key. The same key is never renamed. `nameConflict` is a deprecated alias of `renamed`. When the stream source starts or
+`renamed` on the result: `true` — the server gave this adapter another name than it asked for (`name (2)`): another program on a different key uses this name, or you rotated keys without revoking the old one (the layer stays bound to the old key) — rename one, or revoke the old key. The same key is never renamed. When the stream source starts or
 changes after start — not per frame — call `sourceChanged()` (Python `source_changed()`, C#
 `SourceChanged()`) so viewers that got no answer offer again; calls are coalesced to one
 announcement per second.
