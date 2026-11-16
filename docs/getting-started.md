@@ -109,7 +109,7 @@ python main.py
 
 ```bash
 dotnet new console -o MyAdapter && cd MyAdapter
-dotnet add package StudioXid.OmniAdapter --prerelease   # only beta versions are published so far
+dotnet add package StudioXid.OmniAdapter
 dotnet run                                            # with the example in Program.cs
 ```
 
@@ -136,7 +136,7 @@ repositories {
 }
 
 dependencies {
-    implementation("com.studioxid:omni-adapter:0.1.0-beta.2")
+    implementation("com.studioxid:omni-adapter:0.1.0")
 }
 
 application {
@@ -159,7 +159,7 @@ import PackageDescription
 let package = Package(
     name: "MyAdapter",
     platforms: [.macOS(.v10_15), .iOS(.v13)],         // required — the adapter needs these
-    dependencies: [.package(url: "https://github.com/ProtoPie/omni-adapter-swift", from: "0.1.0-beta.2")],
+    dependencies: [.package(url: "https://github.com/ProtoPie/omni-adapter-swift", from: "0.1.0")],
     targets: [
         .executableTarget(name: "MyAdapter", dependencies: [
             .product(name: "OmniAdapter", package: "omni-adapter-swift"),  // package = repository name
@@ -178,7 +178,7 @@ name: my_adapter
 environment:
   sdk: ^3.4.0
 dependencies:
-  omni_adapter: ^0.1.0-beta.2   # only beta versions are published so far
+  omni_adapter: ^0.1.0
 ```
 
 Put the example in `bin/main.dart` and run `dart pub get && dart run bin/main.dart`.

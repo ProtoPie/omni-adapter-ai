@@ -53,9 +53,9 @@ repository `ProtoPie/omni-adapter-swift`.
 | --- | --- |
 | TS | `npm install @studioxid/omni-adapter` (ESM-only; `package.json` needs `"type": "module"`) |
 | Python | `pip install omni-adapter` (module `omni_adapter`) |
-| C# | `dotnet add package StudioXid.OmniAdapter --prerelease` (beta only so far) |
-| Kotlin | module: `implementation("com.studioxid:omni-adapter:0.1.0-beta.2")` with `mavenCentral()` in `repositories` |
-| Swift | `.package(url: "https://github.com/ProtoPie/omni-adapter-swift", from: "0.1.0-beta.2")` + `.product(name: "OmniAdapter", package: "omni-adapter-swift")` + `platforms: [.macOS(.v10_15), .iOS(.v13)]` |
+| C# | `dotnet add package StudioXid.OmniAdapter` |
+| Kotlin | module: `implementation("com.studioxid:omni-adapter:0.1.0")` with `mavenCentral()` in `repositories` |
+| Swift | `.package(url: "https://github.com/ProtoPie/omni-adapter-swift", from: "0.1.0")` + `.product(name: "OmniAdapter", package: "omni-adapter-swift")` + `platforms: [.macOS(.v10_15), .iOS(.v13)]` |
 | Dart | `dart pub add omni_adapter` (Flutter: `flutter pub add omni_adapter`) |
 
 ## Step 2 — connect with declarations

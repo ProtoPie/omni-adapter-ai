@@ -35,7 +35,7 @@ picture reaches viewers on the same network only):
 The helper also stops itself when the client ends.
 
 Connect with `providesView: 'stream'` (Python `provides_view="stream"`): on a server with
-adapter stream layers (unreleased) the server then creates and binds the **Adapter Stream**
+adapter stream layers the server then creates and binds the **Adapter Stream**
 layer itself when the adapter joins — in the first group placed on the stage, matched by the
 name the server gave the adapter (`client.me.displayName`; the participant id changes every
 run, the name does not), and a deleted layer comes back on the next join. Without the

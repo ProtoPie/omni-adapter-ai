@@ -308,7 +308,7 @@ if __name__ == "__main__":
 **Install** — netstandard2.0 + net8.0:
 
 ```bash
-dotnet add package StudioXid.OmniAdapter --prerelease   # only beta versions are published so far
+dotnet add package StudioXid.OmniAdapter
 ```
 
 
@@ -416,7 +416,7 @@ repositories {
 }
 
 dependencies {
-    implementation("com.studioxid:omni-adapter:0.1.0-beta.2")
+    implementation("com.studioxid:omni-adapter:0.1.0")
 }
 
 application {
@@ -512,7 +512,7 @@ import PackageDescription
 let package = Package(
     name: "MyAdapter",
     platforms: [.macOS(.v10_15), .iOS(.v13)],            // required
-    dependencies: [.package(url: "https://github.com/ProtoPie/omni-adapter-swift", from: "0.1.0-beta.2")],
+    dependencies: [.package(url: "https://github.com/ProtoPie/omni-adapter-swift", from: "0.1.0")],
     targets: [
         .executableTarget(name: "MyAdapter", dependencies: [
             .product(name: "OmniAdapter", package: "omni-adapter-swift"),   // package = the repository name
@@ -601,7 +601,7 @@ for await event in await client.events() {
 
 ```yaml
 dependencies:
-  omni_adapter: ^0.1.0-beta.2   # beta only so far; ^0.1.0 does not match a prerelease
+  omni_adapter: ^0.1.0
 ```
 
 **A complete program** (`bin/main.dart`, Dart VM):
@@ -886,7 +886,7 @@ export async function broadcastCanvas(token: string, canvas: HTMLCanvasElement):
 | Dart | `startScreenBroadcast(client: client, createSession: (viewer, sendIce, iceServers, wireInput) async => …)` | `flutter_webrtc` lives in your app |
 
 - **ICE servers come from the server**: every language has `fetchIceServers()` (STUN + short-lived TURN; successes are cached, failures are not — the next call asks again. On failure it returns a still-cached list (one due for refresh — lists are fetched again at half their remaining lifetime), else the server's public STUN list when only the stage's list failed, else `[]`). The TS helper applies it; elsewhere hand it to your peer configuration. A peer built without it connects inside the same network only ("works in the office, remote viewers see nothing"). Do not hard-code STUN URLs.
-- **The layer comes from `providesView: 'stream'`**: on a server with adapter stream layers (unreleased), an adapter that joins with it gets its Adapter Stream layer created and bound by the server — in the first group placed on the stage, matched by the name the server gave it (`client.me.displayName`); a deleted layer comes back on the next join. Without the declaration no layer is created and the helper records `stream-undeclared` once in `diagnostics()`.
+- **The layer comes from `providesView: 'stream'`**: on a server with adapter stream layers, an adapter that joins with it gets its Adapter Stream layer created and bound by the server — in the first group placed on the stage, matched by the name the server gave it (`client.me.displayName`); a deleted layer comes back on the next join. Without the declaration no layer is created and the helper records `stream-undeclared` once in `diagnostics()`.
 - `ensureStreamLayer()` (Python `ensure_stream_layer()`) is optional — an idempotent call that returns that layer. `renamed: true` means the server gave you another name than you asked for (`name (2)`): another program on a different key uses this name, or you rotated keys without revoking the old one (a screen adapter's layer stays bound to the old key) — rename one, or revoke the old key; a layer under the original name will not show you. TypeScript, Python and Dart log a warning; all six expose `renamed`. Errors: 404 `NotSupported` (server too old), `RoomEnded` (no live session), 429 `TooManyRequests`, `ValidationError` with the server's message (not declared `providesView: 'stream'`, or too many Adapter Stream layers — the hint says which), `NotConnected` (5xx, network, ack timeout, or a server failure while re-validating the key after a 401), `SessionEnded` after `close()`; any other error of that re-validation passes through as `connect()` would report it (for example `AuthRevoked` for a revoked key).
 - When the stream source starts or changes after the helper started — not per frame — call `sourceChanged()` (Python `source_changed()`, C# `SourceChanged()`): it re-announces the adapter so viewers whose offer went unanswered offer again. Calls are coalesced to at most one announcement per second (the first call, then one at the end of the window if more came in); Python's is safe from any thread.
 - **Old sessions are closed for you**: when the adapter comes back with a new participant id (a rejoin into a new session, the 6-hour guest-token revalidation), the viewer sessions from before the drop are closed — viewers address the adapter by participant id and offer again (sessions a viewer opened to the new id while the adapter was still reconnecting stay).
